@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mainstore</title>
+  <%= stylesheet_link_tag    "application", media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%=controller.controller_name %>">
+<div id="banner">
+<%= image_tag("EC Store.jpeg")%>
+<%=@page_title ||"Flower Shop" %>
+</div>
+<div id="columns">
+<div id="side">
+<div id="cart">
+
+</div>
+<ul>
+<li><a href="/store/index">ホーム</a></li>
+<li><a href="http://yahoo.co.jp">よくある質問</a></li>
+<li><a href="http://yahoo.co.jp">ニュース</a></li>
+<li><a href="http://yahoo.co.jp">お問い合わせ</a></li>
+</ul>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-via="wgnc3451" data-size="large" data-dnt="true">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<% if session[:user_id] %>
+<ul>
+<li><%= link_to '注文',orders_path %></li>
+<li><%= link_to '商品',products_path %></li>
+<li><%= link_to 'ユーザ',users_path %></li>
+</ul>
+<%= button_to 'ログアウト',logout_path,method: :delete %>
+
+<% else %>
+<%= button_to 'ログイン',login_path,:method => :get %>
+<%= button_to '新規アカウント作成',new_user_path,:method => :get%>
+
+<% end %>
+
+
+</div>
+<div id="main">
+<%= yield %>
+</div>
+</div>
+</body>
+</html>

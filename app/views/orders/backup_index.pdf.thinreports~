@@ -1,0 +1,8 @@
+report.set_layout tlf: 'reports/index', layout_options: { default: true }
+report.start_new_page
+report.page.values report.page.list(:list).add_row.item(:name).value @order.name
+    		     report.page.list(:list).add_row.item(:address).value @order.address
+    		     report.page.list(:list).add_row.item(:email).value @order.email
+    		     report.page.list(:list).add_row.item(:pay_type).value @order.pay_type
+  end
+end

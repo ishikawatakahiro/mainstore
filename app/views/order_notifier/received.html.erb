@@ -1,0 +1,14 @@
+<h1>Dear <%= @order.name %></h1>
+
+ご注文ありがとうございます。
+あなたがご注文されたのは以下の品目です。
+<p>
+<%= render @order.line_items %>
+</p>
+</br>
+予約日時は、
+<h2><%= @order.apointmentdate %></h2>のご予約を承っております。
+<p>
+ご来店お待ちして折ります。
+</p>
+

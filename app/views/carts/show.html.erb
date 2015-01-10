@@ -1,0 +1,19 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<%end%>
+
+<div class="cart_titile">カート</div>
+
+<table>
+<%= remder)@cart.line_items) %>
+<tr class="total_line">
+<td cplspan="2">合計</td>
+<td class="total_cell"><%= number_to_currency(@cart.total_price,:format=>"%u%n",:unit=>"￥",:precision=>0) %></td>
+</tr>
+</table>
+
+<%=button_to 'カートを空にする',@cart,method: :delete,confirm: '本当によろしいですか？' %>
+
+
+
+
