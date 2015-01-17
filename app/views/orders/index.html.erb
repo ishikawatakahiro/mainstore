@@ -1,40 +1,44 @@
-<h1>Listing orders</h1>
+<h1>注文状況一覧表</h1>
 
+<%= form_tag :action => 'store' do %>
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Email</th>
-      <th>Pay type</th>
+      <th>氏名</th>
+      <th>住所</th>
+      <th>Eメール</th>
+      <th>決済方法</th>
+	<th>   <br> <br> </th>
 	<th>配達済</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
-<% for @order in @orders %>
+ <% for @order in @orders %>
      <tr>
+	 <td><%= hidden_field("order[]", "id") %></td>俯瞰的
         <td><%= @order.name %></td>
         <td><%= @order.address %></td>
         <td><%= @order.email %></td>
         <td><%= @order.pay_type %></td>
-        <td><%= check_box "order[]","delivery" %></td>
-	 <td><%= link_to 'Show', "order[]" %></td>
+	 <td> </td>
+        <td><%= check_box "order[]","delivery",{checked: "t"}%></td>
+	 <td><%= link_to 'Show', "@order" %></td>
        
-
-</td>
-
-
-      </tr>
+     </tr>
 
 <% end %>
   </tbody>
 
 </table>
 <br />
-<%= submit_tag "更新" ,{:type => "button", :onClick => "/orders/index" } %>
 
 <%= link_to 'New Order', new_order_path %>
-<%= link_to 'Print', orders_path(@orders, format: 'pdf') %> |
+<%= link_to '印刷', orders_path(@orders, format: 'pdf') %> |
+
+<%= submit_tag "更新"  %>
+
+<% end %>
+
 <p><%= will_paginate @orders %></p>
+

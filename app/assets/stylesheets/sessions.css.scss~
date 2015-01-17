@@ -1,0 +1,40 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.ishikawa{
+fieldset{
+background: #efe;
+legend{
+color: #dfd;
+background: #141;
+font-family: sans-serif;
+padding: 0.2em 1em;
+}
+}
+
+form{
+color: clack;
+margin: 2em;
+label{
+color: #000000;
+width: 7em;
+float: left;
+text-align:left;
+padding-top:0.2em 1em;
+display: block;
+}
+
+select, textarea, input{
+margin-left: 0.5em;
+}
+
+.submit{
+maegin-left: 4em;
+}
+br{
+display: none
+}
+}
+}
+
+

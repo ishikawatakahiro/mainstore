@@ -5,6 +5,8 @@ class CreateOrders < ActiveRecord::Migration
       t.text :address
       t.string :email
       t.string :pay_type
+      t.boolean :delivery,default: false 
+      t.date    :apointmentdate 
 
       t.timestamps
     end

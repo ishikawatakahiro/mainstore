@@ -1,35 +1,32 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-skip_before_filter :authorize,only:[:new,:create]
+  skip_before_filter :authorize,only:[:new,:create]
   # GET /orders
   # GET /orders.json
   
-
-def index
 	#@orders = Order.paginate :page => params[:page], :order => 'created_at desc', :per_page 10)
 	#@orders = Order.paginate(page: params[:page], order: 'created_at desc', per_page: 10)
+
+
+  def index
 	@orders = Order.paginate(page: params[:page],per_page: 10).order('created_at DESC')
-
-	session[:orders] = @orders
-	@orders = session[:orders]
-#render :action => 'index.html.erb'
-
+	#session[:orders] = @orders
+	#render :action => 'index.html.erb'
 
 	 respond_to do |format|
 	format.html
 	format.pdf { render_order_list(@orders) }
 	format.json{render json: @orders}
   	end
-end
+  end
 
   def confirm
-	 if invalid?(sort(params[:orders]))
-      render :action => 'index.html.erb'
-      return
-    end  
-    
+      #if invalid?(params[:order])
+      #render :action => 'index.html.erb'
+      #return
+     #end
     session[:orders] = @orders;
-    @departments = Department.find(:all)
+   # @departments = Department.find(:all)
     render :action => 'confirm.html.erb'
   end
 
@@ -40,11 +37,11 @@ end
 
   # GET /orders/new
   def new
-@cart=current_cart
-if @cart.line_items.empty?
-redirect_to store_url,notice:"カートは空です"
-return
-end
+    @cart=current_cart
+    if @cart.line_items.empty?
+    redirect_to store_url,notice:"カートは空です"
+    return
+  end
 
     @order = Order.new
   end
@@ -57,46 +54,50 @@ end
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-@order.add_line_items_from_cart(current_cart)
+    @order.add_line_items_from_cart(current_cart)
     respond_to do |format|
       if @order.save
-Cart.destroy(session[:cart_id])
-session[:cart_id]=nil
+	Cart.destroy(session[:cart_id])
+	session[:cart_id]=nil
 
-OrderNotifier.received(@order).deliver
-OrderNotifier.seller(@order).deliver
+	OrderNotifier.received(@order).deliver
+	OrderNotifier.seller(@order).deliver
 
         format.html { redirect_to store_url, notice: 'ご注文ありがとうございます。' }
         format.json { render :show, status: :created, location: @order }
       else
-@cart=current_cart
+	 @cart=current_cart
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end
 
-    def store
-	@orders=session[:orders]
-
- begin
+   def store
+	
+ 	@orders = 
+	#render :action => 'index.html.erb'
+ 	begin
       #トランザクション開始
       ActiveRecord::Base.transaction {
-        for e in @orders
-          next if e.update_check != "1"
+        params[:order].each { |e| 
+          #next if e.delivery != "t"
           
-          #更新します。補足："e"はEmployeeのオブジェクト
-          Order.find(e.id).update_attributes(e.attributes)
-        end
+          	#更新します。補足："e"はEmployeeのオブジェクト
+          	@od = Order.find(e[1]["id"])
+		@od.delivery =  e[1]["delivery"]
+		@od.save
+	}
       }
     rescue => ex
       #例外発生時の処理を記述します。
       render :text => ex
       return
     ensure
-      session[:orders] = nil
+    #  session[:orders] = nil
     end
-    index
+ 	redirect_to orders_path  
+
   end
 
 
@@ -137,7 +138,10 @@ OrderNotifier.seller(@order).deliver
       params.require(:order).permit(:name, :address, :email, :pay_type, :apointmentdate, :delivery)
     end
 
-    def invalid?
+
+
+
+    def invalid?(objects)
    @orders = Array.new
     invalid = false;
     objects.each { |o|

@@ -1,0 +1,22 @@
+<%= form_for(@adminmail) do |f| %>
+  <% if @adminmail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@adminmail.errors.count, "error") %> prohibited this adminmail from being saved:</h2>
+
+      <ul>
+      <% @adminmail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+	<h3> 例："○○○@gmail.com"  </h3>
+<br>
+    <%= f.text_field :admin_mail,:size => "50" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "新規登録" %>
+  </div>
+<% end %>

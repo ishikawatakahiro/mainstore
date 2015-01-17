@@ -1,10 +1,11 @@
-<div class="mainstore_form">
+<div class="ishikawa">
 <% if flash[:alert] %>
 <p id="notice"><%=flash[:alert] %></p>
 <% end %>
 <%= form_tag do %>
 <fieldset>
 <legend>ログインしてください。</legend>
+<div class="sessions">
 <div>
 <%= label_tag :name,'名前:'%>
 <%= text_field_tag :name,params[:name] %>
@@ -17,6 +18,7 @@
 
 <div>
 <%= submit_tag "ログイン" %>
+</div>
 </div>
 </fieldset>
 <% end %>

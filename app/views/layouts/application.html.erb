@@ -41,12 +41,13 @@
 <li><%= link_to '注文',orders_path %></li>
 <li><%= link_to '商品',products_path %></li>
 <li><%= link_to 'ユーザ',users_path %></li>
+
 </ul>
 <%= button_to 'ログアウト',logout_path,method: :delete %>
 
 <% else %>
 <%= button_to 'ログイン',login_path,:method => :get %>
-<%= button_to '新規アカウント作成',new_user_path,:method => :get%>
+<%= button_to '無料会員登録',new_user_path,:method => :get%>
 
 <% end %>
 

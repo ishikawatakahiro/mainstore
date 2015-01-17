@@ -5,10 +5,10 @@
 <div class="cart_titile">カート</div>
 
 <table>
-<%= remder)@cart.line_items) %>
+<%= render(@cart.line_items) %>
 <tr class="total_line">
 <td cplspan="2">合計</td>
-<td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
+<td class="total_cell"><%= number_to_currency(@cart.total_price,:format=>"%u%n",:unit=>"￥",:precision=>0) %></td>
 </tr>
 </table>
 

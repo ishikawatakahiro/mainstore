@@ -1,9 +1,11 @@
 
+
+
 .mainstore_form{
 fieldset{
 background: #efe;
 legend{
-color: #dfd;
+color: #000000;
 background: #141;
 font-family: sans-serif;
 padding: 0.2em 1em;
@@ -11,10 +13,13 @@ padding: 0.2em 1em;
 }
 
 form{
+color: #330033;
+margin: 2em;
 label{
+color: #000000;
 width: 5em;
 float: left;
-text-align:right;
+text-align:left;
 padding-top:0.2em 1em;
 display: block;
 }
@@ -81,7 +86,7 @@ font-size: small;
 
 #cart {
 font-size: smaller;
-color: blue;
+color: orange;
 
 table {
 border-top: 1px dotted #595;

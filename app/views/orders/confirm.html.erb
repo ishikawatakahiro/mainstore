@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>Tutorial: Employee Bulk Update</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <%= stylesheet_link_tag 'ror' %>
+</head>
+<body>
+   
+<h2>配送済みリストに移動します。</h2>
+ 
+<table border="1">
+  <tr style="background-color:pink">
+    <th>Id</th><th>Name</th><th>JobType</th><th>Salary</th><th>Department</th>
+  </tr>
+  <% for e in @orders %>
+  <% next if e.update_check != "1" %>
+  <tr style="background-color:<%= cycle('white', 'yellow') %>">
+    <td align="right"><%=h e.id %></td>
+    <td><%=h e.name %></td>
+    <td><%=h e.address %></td>
+
+    <td><%=h e.email %></td>
+    <td><%=h e.pay_type %></td>
+    <td align="right"><%= number_with_delimiter(e.salary, delimiter=",") %></td>
+    <td><%=h r_label(e.department_id, @departments, "id", "name") %></td>
+  </tr>
+  <% end %>
+</table>
+  
+<% form_tag :action => 'store' do %>
+  <%= submit_tag "更新" %>
+  <%= submit_tag "戻る", {:type => "button", :onClick => "this.form.action='/orders/index'; this.form.submit();"}%>
+<% end %>
+  
+</body>
+</ht

@@ -1,4 +1,6 @@
 
+
+
 .mainstore_form{
 fieldset{
 background: #efe;
@@ -11,10 +13,13 @@ padding: 0.2em 1em;
 }
 
 form{
+color: #330033;
+margin: 2em;
 label{
+color: white;
 width: 5em;
 float: left;
-text-align:right;
+text-align:left;
 padding-top:0.2em 1em;
 display: block;
 }

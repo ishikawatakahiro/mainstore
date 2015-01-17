@@ -1,35 +1,38 @@
 Rails.application.routes.draw do
 
-resources :countings do
+  resources :adminmails
+
+  resources :countings do
   # /countings/1/download => countings#download
   get :download, on: :member, format: :pdf
-end
+  end
 
+  get 'admin' => 'admin#index'
 
-get 'admin' => 'admin#index'
-
-controller :sessions do
-get 'login' =>:new
-post 'login' => :create
-delete 'logout' => :destroy
-end
+  controller :sessions do
+  get 'login' =>:new
+  post 'login' => :create
+  delete 'logout' => :destroy
+  end
 
   resources :users
 
   resources :orders
-
+  match 'confirm' => 'orders#confirm',:via => :post
+  match 'store' => 'orders#store',:via => :post
   resources :line_items
 
   resources :carts
 
   get 'store/index'
-
-resource :products do
-get :who_bought, on: :member
-end
+#  matches {:action=>"store", :controller=>"orders", :via => "post"}
   resources :products
-
- root to:'store#index',as:'store'
+  resource :products do
+  get :who_bought, on: :member
+  end
+  
+  
+ root to:'store#index',as:'home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

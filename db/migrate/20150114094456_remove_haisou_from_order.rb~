@@ -1,0 +1,5 @@
+class RemoveHaisouFromOrder < ActiveRecord::Migration
+  def change
+    remove_column :orders, :haisou, :string
+  end
+end

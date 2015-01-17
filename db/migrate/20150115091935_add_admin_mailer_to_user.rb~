@@ -1,0 +1,6 @@
+class AddAdminMailerToUser < ActiveRecord::Migration
+  def change
+    add_column :users, :admin_mailer, :string
+    add_column :users, :, :string
+  end
+end

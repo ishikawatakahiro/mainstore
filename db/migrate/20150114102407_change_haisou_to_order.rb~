@@ -1,0 +1,8 @@
+class ChangeHaisouToOrder < ActiveRecord::Migration
+  def up
+	change_column :orders, :haisou, :boolean, :default => "false"
+  end
+  def down
+	change_column :orders, :haisou, :boolean
+  end
+end
